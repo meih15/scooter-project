@@ -24,6 +24,26 @@ class Scooter {
       this.user = null;
   }
 
+  async recharge() {
+    console.log('Starting charge');
+
+    await new Promise(resolve => setTimeout(resolve, 2000)); // wait 2 seconds
+    this.charge = 100;
+
+    console.log('Charge complete');
+  }
+
+
+  requestRepair() {
+    console.log('Repair requested');
+    
+    setTimeout(() => {
+        this.isBroken = false;
+        console.log('Repair completed');
+    }, 5000); // repair in 5 seconds
+  }
+
+
   
 }
 
