@@ -50,6 +50,8 @@ describe('scooter methods', () => {
 
   // requestRepair method
   jest.useFakeTimers();
+  jest.setTimeout(10000);
+
 
 
 
@@ -70,10 +72,22 @@ describe('scooter methods', () => {
 
   // charge method
 
-  test("charge", async () => {
-    const scooter = new Scooter();
-    await scooter.recharge(); // we need to wait for the charge!
-    expect(newScooter.charge).toBe(100);
+  describe('Scooter recharge method tests', () => {
+    test('should recharge the scooter battery to 100%', async () => {
+      jest.useFakeTimers(); // Enable mock timers
+  
+      const scooter = new Scooter();
+      scooter.charge = 50; // Simulate a partially charged battery
+  
+      const rechargePromise = scooter.recharge(); // Start the recharge process
+  
+      // Advance the timers by 2 seconds to simulate the recharge time
+      jest.advanceTimersByTime(2000);
+  
+      await rechargePromise; // Wait for the recharge process to complete
+  
+      expect(scooter.charge).toBe(100); // Check if the charge is now at 100%
+    });
   });
 
 })
